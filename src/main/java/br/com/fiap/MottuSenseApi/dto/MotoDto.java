@@ -1,21 +1,17 @@
-package br.com.fiap.MottuSenseApi.model;
+package br.com.fiap.MottuSenseApi.dto;
 
-import jakarta.persistence.*;
+import br.com.fiap.MottuSenseApi.model.StatusMoto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Entity
 @Data
-public class Moto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@NoArgsConstructor
+@AllArgsConstructor
+public class MotoDto {
     private Long id;
 
     @NotBlank(message = "Placa não pode estar em branco")
@@ -31,14 +27,8 @@ public class Moto {
     private String numeroChassi;
 
     @NotNull(message = "Status não pode ser nulo")
-    @Enumerated(EnumType.STRING)
     private StatusMoto status;
 
-    @ManyToOne
-    @JoinColumn(name = "patio_id")
-    private Patio patio;
-
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    @NotNull(message = "Cliente ID não pode ser nulo")
+    private Long clienteId;
 }

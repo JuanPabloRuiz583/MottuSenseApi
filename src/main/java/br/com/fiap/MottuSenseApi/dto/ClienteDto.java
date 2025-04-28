@@ -1,23 +1,16 @@
-package br.com.fiap.MottuSenseApi.model;
+package br.com.fiap.MottuSenseApi.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
 @Data
-public class Cliente {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@NoArgsConstructor
+@AllArgsConstructor
+public class ClienteDto {
     private Long id;
 
     @NotBlank(message = "Nome não pode estar em branco")
@@ -32,7 +25,4 @@ public class Cliente {
     @NotBlank(message = "Senha não pode estar em branco")
     @Size(min = 8, max = 20, message = "Senha deve ter entre 8 e 20 caracteres")
     private String senha;
-
-    @OneToMany(mappedBy = "cliente")
-    private List<Moto> motos;
 }
