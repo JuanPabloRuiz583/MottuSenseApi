@@ -1,15 +1,18 @@
 package br.com.fiap.MottuSenseApi.dto;
 
+import br.com.fiap.MottuSenseApi.model.Cliente;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 public class ClienteDto {
     private Long id;
 
@@ -25,4 +28,11 @@ public class ClienteDto {
     @NotBlank(message = "Senha não pode estar em branco")
     @Size(min = 8, max = 20, message = "Senha deve ter entre 8 e 20 caracteres")
     private String senha;
+
+    public ClienteDto(Cliente cliente) {
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+        this.email = cliente.getEmail();
+        this.senha = cliente.getSenha();
+    }
 }

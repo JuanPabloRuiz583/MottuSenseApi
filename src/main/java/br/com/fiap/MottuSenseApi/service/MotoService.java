@@ -2,10 +2,14 @@ package br.com.fiap.MottuSenseApi.service;
 import br.com.fiap.MottuSenseApi.dto.MotoDto;
 import br.com.fiap.MottuSenseApi.model.Cliente;
 import br.com.fiap.MottuSenseApi.model.Moto;
+import br.com.fiap.MottuSenseApi.model.Patio;
 import br.com.fiap.MottuSenseApi.repository.ClienteRepository;
 import br.com.fiap.MottuSenseApi.repository.MotoRepository;
+import br.com.fiap.MottuSenseApi.repository.PatioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,23 +26,41 @@ public class MotoService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public Page<MotoDto> findAll(Pageable pageable) {
+
+    @Autowired
+    private PatioRepository patioRepository;
+
+    @Cacheable("motos")
+    public List<MotoDto> findAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         return motoRepository.findAll(pageable)
+                .stream()
                 .map(moto -> new MotoDto(
                         moto.getId(),
                         moto.getPlaca(),
                         moto.getModelo(),
                         moto.getNumeroChassi(),
                         moto.getStatus(),
-                        moto.getCliente().getId()));
+                        moto.getCliente().getId(),
+                        moto.getPatio().getId()))
+                .toList();
     }
 
     public MotoDto findById(Long id) {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Moto não encontrada"));
-        return new MotoDto(moto.getId(), moto.getPlaca(), moto.getModelo(), moto.getNumeroChassi(), moto.getStatus(), moto.getCliente().getId());
+        return new MotoDto(
+                moto.getId(),
+                moto.getPlaca(),
+                moto.getModelo(),
+                moto.getNumeroChassi(),
+                moto.getStatus(),
+                moto.getCliente().getId(),
+                moto.getPatio().getId());
     }
 
+
+    @CacheEvict(value = "motos", allEntries = true)
     public MotoDto save(MotoDto dto) {
         Moto moto = new Moto();
         moto.setPlaca(dto.getPlaca());
@@ -50,10 +72,22 @@ public class MotoService {
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
         moto.setCliente(cliente);
 
+        Patio patio = patioRepository.findById(dto.getPatioId())
+                .orElseThrow(() -> new RuntimeException("Pátio não encontrado"));
+        moto.setPatio(patio);
+
         moto = motoRepository.save(moto);
-        return new MotoDto(moto.getId(), moto.getPlaca(), moto.getModelo(), moto.getNumeroChassi(), moto.getStatus(), moto.getCliente().getId());
+        return new MotoDto(
+                moto.getId(),
+                moto.getPlaca(),
+                moto.getModelo(),
+                moto.getNumeroChassi(),
+                moto.getStatus(),
+                moto.getCliente().getId(),
+                moto.getPatio().getId());
     }
 
+    @CacheEvict(value = "motos", allEntries = true)
     public MotoDto update(Long id, MotoDto dto) {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Moto não encontrada"));
@@ -67,10 +101,22 @@ public class MotoService {
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
         moto.setCliente(cliente);
 
+        Patio patio = patioRepository.findById(dto.getPatioId())
+                .orElseThrow(() -> new RuntimeException("Pátio não encontrado"));
+        moto.setPatio(patio);
+
         moto = motoRepository.save(moto);
-        return new MotoDto(moto.getId(), moto.getPlaca(), moto.getModelo(), moto.getNumeroChassi(), moto.getStatus(), moto.getCliente().getId());
+        return new MotoDto(
+                moto.getId(),
+                moto.getPlaca(),
+                moto.getModelo(),
+                moto.getNumeroChassi(),
+                moto.getStatus(),
+                moto.getCliente().getId(),
+                moto.getPatio().getId());
     }
 
+    @CacheEvict(value = "motos", allEntries = true)
     public void delete(Long id) {
         motoRepository.deleteById(id);
     }
@@ -83,6 +129,7 @@ public class MotoService {
                         moto.getModelo(),
                         moto.getNumeroChassi(),
                         moto.getStatus(),
-                        moto.getCliente().getId()));
+                        moto.getCliente().getId(),
+                        moto.getPatio().getId()));
     }
 }

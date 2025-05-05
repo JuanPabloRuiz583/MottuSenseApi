@@ -26,6 +26,7 @@ public class SensorLocalizacaoService {
                         sensor.getId(),
                         sensor.getLatitude(),
                         sensor.getLongitude(),
+                        sensor.getTimeDaLocalizacao(),
                         sensor.getMoto().getId()))
                 .collect(Collectors.toList());
     }
@@ -37,6 +38,7 @@ public class SensorLocalizacaoService {
                 sensor.getId(),
                 sensor.getLatitude(),
                 sensor.getLongitude(),
+                sensor.getTimeDaLocalizacao(),
                 sensor.getMoto().getId());
     }
 
@@ -44,6 +46,7 @@ public class SensorLocalizacaoService {
         SensorLocalizacao sensor = new SensorLocalizacao();
         sensor.setLatitude(dto.getLatitude());
         sensor.setLongitude(dto.getLongitude());
+        sensor.setTimeDaLocalizacao(dto.getTimeDaLocalizacao());
 
         Moto moto = motoRepository.findById(dto.getMotoId())
                 .orElseThrow(() -> new RuntimeException("Moto não encontrada"));
@@ -54,6 +57,7 @@ public class SensorLocalizacaoService {
                 sensor.getId(),
                 sensor.getLatitude(),
                 sensor.getLongitude(),
+                sensor.getTimeDaLocalizacao(),
                 sensor.getMoto().getId());
     }
 
@@ -63,6 +67,7 @@ public class SensorLocalizacaoService {
 
         sensor.setLatitude(dto.getLatitude());
         sensor.setLongitude(dto.getLongitude());
+        sensor.setTimeDaLocalizacao(dto.getTimeDaLocalizacao());
 
         Moto moto = motoRepository.findById(dto.getMotoId())
                 .orElseThrow(() -> new RuntimeException("Moto não encontrada"));
@@ -73,6 +78,7 @@ public class SensorLocalizacaoService {
                 sensor.getId(),
                 sensor.getLatitude(),
                 sensor.getLongitude(),
+                sensor.getTimeDaLocalizacao(),
                 sensor.getMoto().getId());
     }
 

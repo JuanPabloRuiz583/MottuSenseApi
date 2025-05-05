@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Data
 public class Patio {
@@ -27,12 +28,6 @@ public class Patio {
     @NotBlank(message = "Endereço não pode estar em branco")
     @Size(max = 255, message = "Endereço não pode exceder 255 caracteres")
     private String endereco;
-
-    @NotNull(message = "Latitude não pode ser nula")
-    private double latitude;
-
-    @NotNull(message = "Longitude não pode ser nula")
-    private double longitude;
 
     @OneToMany(mappedBy = "patio")
     private List<Moto> motos;

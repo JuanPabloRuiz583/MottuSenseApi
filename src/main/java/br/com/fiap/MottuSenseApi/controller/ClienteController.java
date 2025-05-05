@@ -16,9 +16,16 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
+   // @GetMapping
+    //public ResponseEntity<List<ClienteDto>> findAll() {
+     //   return ResponseEntity.ok(clienteService.findAll());
+    //}
+
     @GetMapping
-    public ResponseEntity<List<ClienteDto>> findAll() {
-        return ResponseEntity.ok(clienteService.findAll());
+    public ResponseEntity<List<ClienteDto>> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(clienteService.findAll(page, size));
     }
 
     @GetMapping("/{id}")

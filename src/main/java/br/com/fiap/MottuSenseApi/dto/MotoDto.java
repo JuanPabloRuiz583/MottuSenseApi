@@ -29,6 +29,9 @@ public class MotoDto {
     @NotNull(message = "Status não pode ser nulo")
     private StatusMoto status;
 
+    @NotNull(message = "Pátio deve ser informado")
+    private Long patioId;
+
     @NotNull(message = "Cliente ID não pode ser nulo")
     private Long clienteId;
 }

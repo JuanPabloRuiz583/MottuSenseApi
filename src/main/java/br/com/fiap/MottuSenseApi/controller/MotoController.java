@@ -19,10 +19,17 @@ public class MotoController {
     @Autowired
     private MotoService motoService;
 
+    //@GetMapping
+    //@Cacheable("motos")
+    //public ResponseEntity<Page<MotoDto>> findAll(Pageable pageable) {
+      //  return ResponseEntity.ok(motoService.findAll(pageable));
+    //}
+
     @GetMapping
-    @Cacheable("motos")
-    public ResponseEntity<Page<MotoDto>> findAll(Pageable pageable) {
-        return ResponseEntity.ok(motoService.findAll(pageable));
+    public ResponseEntity<List<MotoDto>> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(motoService.findAll(page, size));
     }
 
     @GetMapping("/{id}")
