@@ -1,3 +1,20 @@
+# Proposta
+
+MottuSense é uma solução inteligente desenvolvida para a Mottu, focada no mapeamento automatizado do pátio e na gestão eficiente das motos da frota.
+Utilizando sensores IoT e uma arquitetura em nuvem com APIs .o sistema permite monitoramento em tempo real, controle de entrada e saída dos veículos, e integração com um app mobile para operadores.
+Combinando banco de dados relacional e não relacional, DevOps, testes de qualidade e tecnologias modernas de desenvolvimento mobile e backend, o MottuSense garante rastreabilidade, performance e escalabilidade — tudo alinhado com os pilares da Mottu: tecnologia, mobilidade e oportunidade.
+
+🛵 Nome da Solução: MottuSense
+🔤 Significado:
+"Mottu" (nome da empresa)
+"Sense" de sensorial, percepção, inteligência → representa a capacidade da solução de "sentir" e gerenciar o pátio de motos com IoT.
+
+## Diferencial
+
+- Monitoramento em tempo real das motos atraves dos sensores
+- localização exata das motos
+
+
 # MottuSense API
 
 MottuSense API é uma aplicação Spring Boot desenvolvida para gerenciar motos, clientes, pátios e sensores de localizaçao vinculados as motos. Ela oferece operações CRUD para o gerenciamento de motos,patios,sensores de localização e clientes, e inclui uma funcionalidade de busca para filtrar motos por parâmetros como placa e modelo.
@@ -18,6 +35,7 @@ MottuSense API é uma aplicação Spring Boot desenvolvida para gerenciar motos,
 - **Spring Data JPA**
 - **Spring Cache**
 - **Lombok**
+- **Swagger**
 
 ## Pré-requisitos
 
@@ -33,7 +51,7 @@ Siga os passos abaixo para configurar e executar o projeto localmente:
 ### 1. Clone o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/mottusense-api.git
+git clone https://github.com/JuanPabloRuiz583/MottuSenseApi.git
 cd mottusense-api
 ```
 
