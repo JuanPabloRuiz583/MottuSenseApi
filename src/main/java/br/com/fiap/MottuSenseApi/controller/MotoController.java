@@ -19,11 +19,7 @@ public class MotoController {
     @Autowired
     private MotoService motoService;
 
-    //@GetMapping
-    //@Cacheable("motos")
-    //public ResponseEntity<Page<MotoDto>> findAll(Pageable pageable) {
-      //  return ResponseEntity.ok(motoService.findAll(pageable));
-    //}
+
 
     @GetMapping
     public ResponseEntity<List<MotoDto>> findAll(
@@ -54,10 +50,9 @@ public class MotoController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<MotoDto>> searchByParams(
+    public ResponseEntity<List<MotoDto>> searchByParams(
             @RequestParam(required = false) String placa,
-            @RequestParam(required = false) String modelo,
-            Pageable pageable) {
-        return ResponseEntity.ok(motoService.searchByParams(placa, modelo, pageable));
+            @RequestParam(required = false) String modelo) {
+        return ResponseEntity.ok(motoService.searchByParams(placa, modelo));
     }
 }

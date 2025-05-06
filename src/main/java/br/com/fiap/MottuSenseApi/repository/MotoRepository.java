@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface MotoRepository extends JpaRepository<Moto, Long> {
 
 
@@ -15,8 +17,10 @@ public interface MotoRepository extends JpaRepository<Moto, Long> {
         @Query("SELECT m FROM Moto m WHERE " +
                 "(:placa IS NULL OR m.placa = :placa) AND " +
                 "(:modelo IS NULL OR m.modelo = :modelo)")
-        Page<Moto> searchByParams(@Param("placa") String placa,
-                                  @Param("modelo") String modelo,
-                                  Pageable pageable);
+      //  Page<Moto> searchByParams(@Param("placa") String placa,
+        //                          @Param("modelo") String modelo,
+          //                        Pageable pageable);
 
+        List<Moto> searchByParams(@Param("placa") String placa, @Param("modelo") String modelo);
+        boolean existsByNumeroChassi(String numeroChassi);
 }

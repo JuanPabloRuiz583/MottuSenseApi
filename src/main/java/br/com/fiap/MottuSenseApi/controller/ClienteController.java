@@ -16,10 +16,6 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-   // @GetMapping
-    //public ResponseEntity<List<ClienteDto>> findAll() {
-     //   return ResponseEntity.ok(clienteService.findAll());
-    //}
 
     @GetMapping
     public ResponseEntity<List<ClienteDto>> findAll(

@@ -26,7 +26,6 @@ public class MotoService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-
     @Autowired
     private PatioRepository patioRepository;
 
@@ -46,6 +45,7 @@ public class MotoService {
                 .toList();
     }
 
+    @Cacheable(value = "motos", key = "#id")
     public MotoDto findById(Long id) {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Moto não encontrada"));
@@ -59,9 +59,12 @@ public class MotoService {
                 moto.getPatio().getId());
     }
 
-
     @CacheEvict(value = "motos", allEntries = true)
     public MotoDto save(MotoDto dto) {
+        if (motoRepository.existsByNumeroChassi(dto.getNumeroChassi())) {
+            throw new IllegalArgumentException("Moto com o número de chassi " + dto.getNumeroChassi() + " já existe.");
+        }
+
         Moto moto = new Moto();
         moto.setPlaca(dto.getPlaca());
         moto.setModelo(dto.getModelo());
@@ -92,6 +95,12 @@ public class MotoService {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Moto não encontrada"));
 
+        // Validate if a motorcycle with the same chassis number already exists (excluding the current one)
+        if (!moto.getNumeroChassi().equals(dto.getNumeroChassi()) &&
+                motoRepository.existsByNumeroChassi(dto.getNumeroChassi())) {
+            throw new IllegalArgumentException("Moto com o número de chassi " + dto.getNumeroChassi() + " já existe.");
+        }
+
         moto.setPlaca(dto.getPlaca());
         moto.setModelo(dto.getModelo());
         moto.setNumeroChassi(dto.getNumeroChassi());
@@ -121,8 +130,9 @@ public class MotoService {
         motoRepository.deleteById(id);
     }
 
-    public Page<MotoDto> searchByParams(String placa, String modelo, Pageable pageable) {
-        return motoRepository.searchByParams(placa, modelo, pageable)
+    public List<MotoDto> searchByParams(String placa, String modelo) {
+        List<Moto> motos = motoRepository.searchByParams(placa, modelo);
+        return motos.stream()
                 .map(moto -> new MotoDto(
                         moto.getId(),
                         moto.getPlaca(),
@@ -130,6 +140,7 @@ public class MotoService {
                         moto.getNumeroChassi(),
                         moto.getStatus(),
                         moto.getCliente().getId(),
-                        moto.getPatio().getId()));
+                        moto.getPatio().getId()))
+                .toList();
     }
 }
