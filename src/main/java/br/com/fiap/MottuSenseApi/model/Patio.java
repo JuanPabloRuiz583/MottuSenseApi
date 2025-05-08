@@ -29,6 +29,6 @@ public class Patio {
     @Size(max = 255, message = "Endereço não pode exceder 255 caracteres")
     private String endereco;
 
-    @OneToMany(mappedBy = "patio")
+    @OneToMany(mappedBy = "patio", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Moto> motos;
 }

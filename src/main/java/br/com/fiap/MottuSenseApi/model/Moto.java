@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -41,4 +43,8 @@ public class Moto {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "moto", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<SensorLocalizacao> sensores;
+
 }

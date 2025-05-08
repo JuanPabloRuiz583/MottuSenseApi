@@ -34,6 +34,6 @@ public class Cliente {
     @Size(min = 8, max = 20, message = "Senha deve ter entre 8 e 20 caracteres")
     private String senha;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Moto> motos;
 }
