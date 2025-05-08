@@ -52,7 +52,6 @@ Siga os passos abaixo para configurar e executar o projeto localmente:
 
 ```bash
 git clone https://github.com/JuanPabloRuiz583/MottuSenseApi.git
-cd mottusense-api
 ```
 
 ### 2. Compile o Projeto
