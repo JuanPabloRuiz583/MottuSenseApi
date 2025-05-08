@@ -71,11 +71,11 @@ Inicie a aplicação com o comando:
 mvn spring-boot:run
 ```
 
-A aplicação estará disponível em `http://localhost:8080`.
+A aplicação estará disponível em: http://localhost:8080  OU  http://localhost:8080/swagger-ui.html (caso deseja acessar o swagger)
 
 ### 4. Acesse os Endpoints
 
-Você pode usar ferramentas como **Postman** ou **cURL** para interagir com a API. Exemplos de endpoints:
+Você pode usar ferramentas como **Postman** ou **Swagger** para interagir com a API. Exemplos de endpoints:
 
 - **Listar Todas as Motos**: `GET /motos`
 - **Buscar Motos**: `GET /motos/search?placa=ABC1234&modelo=Honda`
@@ -83,13 +83,18 @@ Você pode usar ferramentas como **Postman** ou **cURL** para interagir com a AP
 - **Atualizar uma Moto**: `PUT /motos/{id}`
 - **Deletar uma Moto**: `DELETE /motos/{id}`
 
+### Swagger
+
+Link do swagger: http://localhost:8080/swagger-ui.html
+
+
 ### 5. Console do Banco de Dados H2
 
 O console do banco de dados H2 está disponível em `http://localhost:8080/h2-console`. Use as credenciais abaixo:
 
-- **JDBC URL**: `jdbc:h2:mem:testdb`
-- **Usuário**: `sa`
-- **Senha**: *(deixe em branco)*
+- **JDBC URL**: jdbc:h2:mem:MottuSenseApi
+- **Usuário**: sa
+- **Senha**: password
 
 ## Seeder de Banco de Dados
 
