@@ -35,13 +35,13 @@ public class DatabaseSeeder {
         // Criando clientes
         var cliente1 = Cliente.builder()
                 .nome("João Silva")
-                .email("joao.silva@example.com")
+                .email("joao.silva@examplo.com")
                 .senha("123456789")
                 .build();
 
         var cliente2 = Cliente.builder()
                 .nome("Maria Oliveira")
-                .email("maria.oliveira@example.com")
+                .email("maria.oliveira@examplo.com")
                 .senha("987654321")
                 .build();
 
