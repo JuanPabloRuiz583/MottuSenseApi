@@ -76,14 +76,14 @@ A aplicação estará disponível em: http://localhost:8080/swagger-ui.html
 
 Você pode usar ferramentas como **Postman** ou **Swagger** para interagir com a API. Exemplos de endpoints:
 
-# **ClienteController** (`/clientes`)
+### **ClienteController** (`/clientes`)
 - **GET** `/clientes`: Retorna uma lista paginada de clientes.
 - **GET** `/clientes/{id}`: Retorna os detalhes de um cliente pelo ID.
 - **POST** `/clientes`: Cria um novo cliente.
 - **PUT** `/clientes/{id}`: Atualiza os dados de um cliente pelo ID.
 - **DELETE** `/clientes/{id}`: Remove um cliente pelo ID.
 
-# **MotoController** (`/motos`)
+### **MotoController** (`/motos`)
 - **GET** `/motos`: Retorna uma lista paginada de motos.
 - **GET** `/motos/{id}`: Retorna os detalhes de uma moto pelo ID.
 - **POST** `/motos`: Cria uma nova moto.
@@ -91,14 +91,14 @@ Você pode usar ferramentas como **Postman** ou **Swagger** para interagir com a
 - **DELETE** `/motos/{id}`: Remove uma moto pelo ID.
 - **GET** `/motos/search`: Busca motos por parâmetros opcionais (`placa`, `modelo`).
 
-# **PatioController** (`/patios`)
+### **PatioController** (`/patios`)
 - **GET** `/patios`: Retorna uma lista de pátios.
 - **GET** `/patios/{id}`: Retorna os detalhes de um pátio pelo ID.
 - **POST** `/patios`: Cria um novo pátio.
 - **PUT** `/patios/{id}`: Atualiza os dados de um pátio pelo ID.
 - **DELETE** `/patios/{id}`: Remove um pátio pelo ID.
 
-# **SensorLocalizacaoController** (`/sensores`)
+### **SensorLocalizacaoController** (`/sensores`)
 - **GET** `/sensores`: Retorna uma lista de sensores de localização.
 - **GET** `/sensores/{id}`: Retorna os detalhes de um sensor pelo ID.
 - **POST** `/sensores`: Cria um novo sensor de localização.
