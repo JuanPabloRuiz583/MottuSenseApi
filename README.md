@@ -70,17 +70,47 @@ Inicie a aplicação com o comando:
 mvn spring-boot:run
 ```
 
-A aplicação estará disponível em: http://localhost:8080  OU  http://localhost:8080/swagger-ui.html (caso deseja acessar o swagger)
+A aplicação estará disponível em: http://localhost:8080/swagger-ui.html
 
 ### 4. Acesse os Endpoints
 
 Você pode usar ferramentas como **Postman** ou **Swagger** para interagir com a API. Exemplos de endpoints:
 
-- **Listar Todas as Motos**: `GET /motos`
-- **Buscar Motos**: `GET /motos/search?placa=ABC1234&modelo=Honda`
-- **Criar uma Moto**: `POST /motos`
-- **Atualizar uma Moto**: `PUT /motos/{id}`
-- **Deletar uma Moto**: `DELETE /motos/{id}`
+# **ClienteController** (`/clientes`)
+- **GET** `/clientes`: Retorna uma lista paginada de clientes.
+- **GET** `/clientes/{id}`: Retorna os detalhes de um cliente pelo ID.
+- **POST** `/clientes`: Cria um novo cliente.
+- **PUT** `/clientes/{id}`: Atualiza os dados de um cliente pelo ID.
+- **DELETE** `/clientes/{id}`: Remove um cliente pelo ID.
+
+# **MotoController** (`/motos`)
+- **GET** `/motos`: Retorna uma lista paginada de motos.
+- **GET** `/motos/{id}`: Retorna os detalhes de uma moto pelo ID.
+- **POST** `/motos`: Cria uma nova moto.
+- **PUT** `/motos/{id}`: Atualiza os dados de uma moto pelo ID.
+- **DELETE** `/motos/{id}`: Remove uma moto pelo ID.
+- **GET** `/motos/search`: Busca motos por parâmetros opcionais (`placa`, `modelo`).
+
+# **PatioController** (`/patios`)
+- **GET** `/patios`: Retorna uma lista de pátios.
+- **GET** `/patios/{id}`: Retorna os detalhes de um pátio pelo ID.
+- **POST** `/patios`: Cria um novo pátio.
+- **PUT** `/patios/{id}`: Atualiza os dados de um pátio pelo ID.
+- **DELETE** `/patios/{id}`: Remove um pátio pelo ID.
+
+# **SensorLocalizacaoController** (`/sensores`)
+- **GET** `/sensores`: Retorna uma lista de sensores de localização.
+- **GET** `/sensores/{id}`: Retorna os detalhes de um sensor pelo ID.
+- **POST** `/sensores`: Cria um novo sensor de localização.
+- **PUT** `/sensores/{id}`: Atualiza os dados de um sensor pelo ID.
+- **DELETE** `/sensores/{id}`: Remove um sensor pelo ID.
+
+ Observações Importantes
+
+- **MotoController**: Só é possível criar uma moto se o cliente e o pátio existirem.
+- **ClienteController**: As operações de criação e atualização de clientes exigem validação dos dados enviados.
+- **PatioController**: As operações de criação e atualização de pátios exigem validação dos dados enviados.
+- **SensorLocalizacaoController**: As operações de criação e atualização de sensores de localização exigem validação dos dados enviados e que seja vinculado a uma moto existente.
 
 ### Swagger
 
